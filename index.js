@@ -12,7 +12,7 @@ app.get('/', async (req, res) => {
     res.render('index', {shortUrls: shortUrls});
 })
 
-app.post('/shortUrls', async (re1, res) => {
+app.post('/shortUrls', async (req, res) => {
     await ShortUrl.create({full : req.body.fullURL});
 
     res.redirect('/');

@@ -17,6 +17,16 @@ app.post('/shortUrls', async (req, res) => {
 
     res.redirect('/');
 })
+
+app.get('/:shortUrl', async (req, res) => {
+    const shortUrl  = await ShortUrl.findOne({ short : req.params.shortUrl})
+    if(shortUrl == null){
+      return res.sendStatus(404)
+    }
+    shortUrl.clicks++;
+    shortUrl.save();
+    res.redirect(shortUrl.full);
+  })
 app.listen(port, function(err){
     if(err){
         console.log(`Error in running server ${err}`);
